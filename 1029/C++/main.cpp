@@ -1,10 +1,10 @@
 // https://www.urionlinejudge.com.br/judge/en/problems/view/1019
 #include <iostream>
 
-typedef struct {
+struct FibCount {
   int calls;
   int ones;
-} FibCount;
+};
 
 FibCount fib_count(int x) {
   FibCount a = { .calls = 1, .ones = 0 };
