@@ -2,10 +2,10 @@
 #include <iostream>
 #include <map>
 
-typedef struct {
+struct FibCount {
   int calls;
   int ones;
-} FibCount;
+};
 
 using FibMemo = std::map<int, FibCount>;
 
