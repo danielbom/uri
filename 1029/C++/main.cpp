@@ -1,32 +1,28 @@
-// https://www.urionlinejudge.com.br/judge/en/problems/view/1000
+// https://www.urionlinejudge.com.br/judge/en/problems/view/1019
 #include <iostream>
-#include <map>
 
 typedef struct {
   int calls;
   int ones;
 } FibCount;
 
-using FibMemo = std::map<int, FibCount>;
+FibCount fib_count(int x) {
+  FibCount a = { .calls = 1, .ones = 0 };
+  FibCount b = { .calls = 1, .ones = 1 };
+  FibCount c;
 
-FibCount _fib_count_rec(int a, FibMemo &memo) {
-  if (memo.count(a) > 0) return memo.at(a);
-  FibCount x = _fib_count_rec(a - 1, memo);
-  FibCount y = _fib_count_rec(a - 2, memo);
-  memo[a] = {
-    .calls = x.calls + y.calls + 1,
-    .ones = x.ones + y.ones
-  };
-  return memo[a];
-}
+  if (x <= 0) return a;
+  if (x == 1) return b;
 
-FibCount fib_count(int a) {
-  FibMemo memo;
-  memo[0] = { .calls = 1, .ones = 0 };
-  memo[1] = { .calls = 1, .ones = 1 };
-  FibCount result = _fib_count_rec(a, memo);
-  result.calls--;
-  return result;
+  for (int i = 1; i < x; i++) {
+    c.calls = a.calls + b.calls + 1;
+    c.ones = a.ones + b.ones;
+    a = b;
+    b = c;
+  }
+
+  b.calls--;
+  return b;
 }
 
 int main() {
