@@ -19,6 +19,13 @@ function dotest() {
 echo "🏁 Start tests"
 rustc main.rs
 
+if [ $? -ne 0 ]; then
+  echo "Compilation erro"
+  exit 1
+fi
+
+rustfmt main.rs
+
 for filename in ../inputs/*.txt
 do
   dotest `basename $filename`

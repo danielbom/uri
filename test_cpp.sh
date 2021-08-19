@@ -19,6 +19,11 @@ function dotest() {
 echo "🏁 Start tests"
 g++ main.cpp
 
+if [ $? -ne 0 ]; then
+  echo "Compilation erro"
+  exit 1
+fi
+
 for filename in ../inputs/*.txt
 do
   dotest `basename $filename`
