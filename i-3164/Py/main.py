@@ -10,3 +10,4 @@ if __name__ == "__main__":
 
     ks = [j * (n + 1) // 4 for j in range(1, 4)]
     
+    
