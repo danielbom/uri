@@ -1,4 +1,4 @@
-// https://www.urionlinejudge.com.br/judge/en/problems/view/1008
+// https://www.urionlinejudge.com.br/judge/en/problems/view/1072
 use std::io;
 use std::str::FromStr;
 
