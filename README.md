@@ -11,6 +11,7 @@
 * 1008: Salary measure
 * 1009: Salary with sales measure
 * 1010: Product sum
+* 1011: Sphere volume
 ...
 * [1015]: Point distance
 ...
