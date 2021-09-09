@@ -9,6 +9,7 @@
 * 1006: Arithmetical average of 3 numbers
 * 1007: Math with 4 numbers
 * 1008: Salary measure
+* 1009: Salary with sales measure
 ...
 * [1015]: Point distance
 ...
