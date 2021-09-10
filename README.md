@@ -20,6 +20,7 @@
 * [1018]: Money distribution
 * 1019: Hour format
 * 1020: Date format
+* [1021]: Money distribution with cents
 ...
 * [1029]: Fibonacci sequence calls count
 ...
