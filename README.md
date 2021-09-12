@@ -14,6 +14,7 @@
 * 1011: Sphere volume
 * 1012: Triangle, circle, trapeze, square, rectangle area
 * 1013: The Greatest
+* 1014: Consumption
 ...
 * [1015]: Point distance
 ...
