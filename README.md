@@ -113,6 +113,10 @@
 * 1154: Average of ages
   ...
 
+* 1164:  Perfect number
+
+  ...
+
 * 1168: Count leds
   ...
 
