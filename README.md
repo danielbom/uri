@@ -133,6 +133,10 @@
 
   ...
 
+* 1238: Intercalate String
+
+  ...
+
 * [1828]: Bazinga !
   ...
 
