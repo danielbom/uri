@@ -146,7 +146,11 @@
 * 1858: Theon's Answer
   ...
 
+* 2006: Identifying Tea
+  ...
+
 * 2807: Reversed fibonacci (Iccanobif)
+
   ...
 
 * 2846: Fibonot
