@@ -169,6 +169,8 @@
 
 * 2605: Executive Representatives
 
+* 2606: Categories
+
   ...
 
 * 2609: Products by Categories
