@@ -145,6 +145,10 @@
 
   ...
 
+* 1241: Square Matrix I
+
+  ...
+
 * [1828]: Bazinga !
   ...
 
