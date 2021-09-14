@@ -167,11 +167,18 @@
 
 * 2609: Products by Categories
 
+  ...
+
 * 2807: Reversed fibonacci (Iccanobif)
 
   ...
 
 * 2846: Fibonot
+
+  ...
+
+* 3001: Update without where
+
   ...
 
 * 3170: Christmas balls
