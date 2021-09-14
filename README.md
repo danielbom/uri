@@ -165,6 +165,8 @@
 
   ...
 
+* 2609: Products by Categories
+
 * 2807: Reversed fibonacci (Iccanobif)
 
   ...
