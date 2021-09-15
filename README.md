@@ -70,8 +70,7 @@
 * 1052: Months
   ...
 * 1059: Even numbers
-  ...
-
+* 1060: Positive numbers
 * [1061]: Event format
   ...
 
