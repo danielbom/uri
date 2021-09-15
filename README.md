@@ -1,209 +1,126 @@
 ## Problems
 
 * 1000: Hello World!
-
 * 1001: Sum of 2 numbers
-
 * 1002: Area of the circle
-
 * 1003: Sum of 2 numbers
-
 * 1004: Product of 2 numbers
-
 * 1005: Arithmetical average of 2 numbers
-
 * 1006: Arithmetical average of 3 numbers
-
 * 1007: Math with 4 numbers
-
 * 1008: Salary measure
-
 * 1009: Salary with sales measure
-
 * 1010: Product sum
-
 * 1011: Sphere volume
-
 * 1012: Triangle, circle, trapeze, square, rectangle area
-
 * 1013: The Greatest
-
 * 1014: Consumption
-
 * [1015]: Point distance
   ...
-
 * [1018]: Money distribution
-
 * 1019: Hour format
-
 * 1020: Date format
-
 * [1021]: Money distribution with cents
   ...
-
 * [1029]: Fibonacci sequence calls count
   ...
-
 * 1035: Comparison with 4 numbers
-
 * 1036: Roots of Quadratic Equation with Baskhara
-
 * 1037: Range description
   ...
-
 * [1042]: Sort 3 values
   ...
-
 * 1044: Multiples
   ...
-
 * 1046: Game duration
   ...
-
 * 1048: Salary Increase
 * [1049]: Species map
-
 * 1050: DDD
   ...
-
 * 1052: Months
   ...
 * 1059: Even numbers
 * 1060: Positive numbers
 * [1061]: Event format
   ...
-
+* 1064: Positives and Average
+  ...
 * 1070: Odd count
   ...
-
 * [1071]: Sum of Consecutive Odd Numbers
 * 1072: Count between 10 and 20
 * 1073: Even Square
   ...
-
 * 1075: Remaining 2
   ...
-
 * 1078: Times tables
   ...
-
 * [1094]: Expriments Stats
-
 * 1095: Sequence I & J
-
 * 1096: Sequence I & J
-
 * 1097: Sequence I & J
-
 * 1098: Sequence I & J
   ...
-
 * 1115: Quadrant
-
 * 1116: Dividing X by Y
-
 * 1117: Score Validation
   ...
-
 * 1142: PUM
   ...
-
 * 1144: Logical Sequence
   ...
-
 * 1154: Average of ages
   ...
-
 * 1164:  Perfect number
-
   ...
-
 * 1168: Count leds
   ...
-
 * 1175: Reverse 20 values
-
 * 1176: Fibonacci Array
   ...
-
 * 1195: BST I
   ...
-
 * 1200: BST Ops
   ...
-
 * 1234: Dancing Sentence
-
 * 1235: Middle String
-
   ...
-
 * 1238: Intercalate String
-
   ...
-
 * 1241: Fit or not fit
-
   ...
-
 * 1241: Square Matrix I
-
   ...
-
 * [1828]: Bazinga !
   ...
-
 * 1848: Counting Crow
   ...
-
 * 1858: Theon's Answer
   ...
-
 * 2006: Identifying Tea
   ...
 * 2378: Elevator
   ...
-
 * 2602: Basic Select
-
   ...
-
 * 2604: Under 10 or Greater Than 100
-
 * 2605: Executive Representatives
-
 * 2606: Categories
-
 * 2607: Providers's City in Alphabetical Order
-
   ...
-
 * 2609: Products by Categories
-
   ...
-
 * 2621: Amounts Between 10 and 20
-
   ...
-
 * 2807: Reversed fibonacci (Iccanobif)
-
   ...
-
 * 2846: Fibonot
-
   ...
-
 * 3001: Update without where
-
   ...
-
 * 3091: Rest 1.0
-
   ...
-
 * 3170: Christmas balls
   ...
-
 * 3303: Big/Small word
