@@ -78,8 +78,8 @@
   ...
 
 * [1071]: Sum of Consecutive Odd Numbers
-
 * 1072: Count between 10 and 20
+* 1073: Even Square
   ...
 
 * 1075: Remaining 2
