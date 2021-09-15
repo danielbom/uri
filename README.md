@@ -61,6 +61,7 @@
 * 1046: Game duration
   ...
 
+* 1048: Salary Increase
 * [1049]: Species map
 
 * 1050: DDD
