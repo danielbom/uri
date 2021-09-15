@@ -1,6 +1,4 @@
--- https://www.urionlinejudge.com.br/judge/en/problems/view/2846
+-- https://www.urionlinejudge.com.br/judge/en/problems/view/3091
+import Control.Applicative 
 
-main = do 
-  x <- readLn
-  y <- readLn
-  print $ x `mod` y
+main = mod <$> readLn <*> readLn >>= print
