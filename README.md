@@ -108,7 +108,7 @@
 * 2605: Executive Representatives
 * 2606: Categories
 * 2607: Providers's City in Alphabetical Order
-  ...
+* 2608: Higher and Lower Price
 * 2609: Products by Categories
   ...
 * 2621: Amounts Between 10 and 20
