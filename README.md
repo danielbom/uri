@@ -29,6 +29,7 @@
 * 1036: Roots of Quadratic Equation with Baskhara
 * 1037: Range description
   ...
+* 1041: Coordinates of a Point
 * [1042]: Sort 3 values
 * 1043: Triangle & Trapezium
 * 1044: Multiples
