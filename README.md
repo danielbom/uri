@@ -39,7 +39,7 @@
 * 1048: Salary Increase
 * [1049]: Species map
 * 1050: DDD
-  ...
+* 1051: Taxes
 * 1052: Months
   ...
 * 1059: Even numbers
