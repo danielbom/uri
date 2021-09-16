@@ -16,6 +16,7 @@
 * 1013: The Greatest
 * 1014: Consumption
 * [1015]: Point distance
+* 1016: Kilometers difference in minutes
   ...
 * [1018]: Money distribution
 * 1019: Hour format
