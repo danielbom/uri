@@ -17,7 +17,7 @@
 * 1014: Consumption
 * [1015]: Point distance
 * 1016: Kilometers difference in minutes
-  ...
+* 1017: Fuel Spent
 * [1018]: Money distribution
 * 1019: Hour format
 * 1020: Date format
