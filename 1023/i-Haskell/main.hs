@@ -1,32 +1,34 @@
+{-# language BangPatterns #-}
 import Control.Monad
 import Data.Ord
 import Data.Function
-import qualified Data.Map as M
+import qualified Data.IntMap as IM
 import Text.Printf
 import qualified Data.List as L
 
 
 data AppState = AppState 
-  { consumptionSum :: Integer
-  , populationCount :: Integer
-  , properties :: [(Integer, Integer)]
+  { consumptionSum :: !Int
+  , populationCount :: !Int
+  , properties :: !(IM.IntMap Int)
   }
 
-initialState = AppState 0 0 []
+initialState = AppState 0 0 IM.empty 
 
-updateState s _ = do
+updateState !s _ = do
   line <- getLine
   let xs = map read . words $ line
   case xs of
     (residents:comsumption:_) -> do
-      let perResident = comsumption `div` residents 
+      let !perResident = comsumption `div` residents 
       return $ AppState 
         (consumptionSum s + comsumption)
         (populationCount s + residents)
-        ((perResident, residents):properties s)
+        (IM.insertWith (+) perResident residents $ properties s)
     [] -> return s
 
-checkCity cityCount = do
+checkCity :: Int -> IO ()
+checkCity !cityCount = do
   n <- readLn
 
   if n <= 0
@@ -34,15 +36,13 @@ checkCity cityCount = do
     else do
       when (cityCount > 1) (putStrLn "")
 
-      readState <- foldM updateState initialState [1..n]
+      AppState cSum pCount mapProps <- foldM updateState initialState [1..n]
       
-      let mapProperties = M.fromListWith (+) $ properties readState
-          ps = L.sortBy (compare `on` fst) $ M.toList $ mapProperties
-          pCount = fromIntegral $ populationCount readState
-          cSum = fromIntegral $ consumptionSum readState
-          cAvg = fromIntegral (floor (((cSum / pCount) :: Float) * 100.0)) / (100.0 :: Float)
-      putStrLn $ "Cidade# " ++ show cityCount ++ ":"
-      putStrLn $ unwords . map (\(k, v) -> show v ++ "-" ++ show k) $ ps
+      let ps = L.sort $ IM.toList $ mapProps
+          _100 = 100 :: Float
+          cAvg = fromIntegral (floor ((fromIntegral cSum / fromIntegral pCount) * _100)) / _100
+      putStrLn $ printf "Cidade# %d:" cityCount
+      putStrLn $ unwords . map (\(k, v) -> printf "%d-%d" v k) $ ps
       putStrLn $ printf "Consumo medio: %.2f m3." cAvg
 
       checkCity (cityCount + 1)
