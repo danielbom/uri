@@ -1,17 +1,19 @@
 function dotest() {
   echo "🚩 Test $1"
-  echo "Input:"
-  cat ../inputs/$1
+  #echo "Input:"
+  #cat ../inputs/$1
   ./main > .output < "../inputs/$1"
-  echo "Result:"
-  cat .output
-  echo "" 
+  #echo "Result:"
+  #cat .output
+  #echo "" 
 
   ok=`diff .output ../outputs/$1`
   if [ ! -z "$ok" ]
   then
     echo "$ok"
     exit 1
+  else 
+    echo "✅ Test $1"
   fi
   rm .output
 }
