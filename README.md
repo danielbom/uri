@@ -73,6 +73,8 @@
 * 1097: Sequence I & J
 * 1098: Sequence I & J
   ...
+* 1113: Ascending and Descending
+  ...
 * 1115: Quadrant
 * 1116: Dividing X by Y
 * 1117: Score Validation
