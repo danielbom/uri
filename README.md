@@ -88,6 +88,7 @@
 * 1150: Exceeding Z
 * 1151: Easy Fibonicci 
   ...
+* 1153: Simple Factorial 
 * 1154: Average of ages
 * 1155: S Sequence
 * 1156: S Sequence II
