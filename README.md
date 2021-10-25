@@ -66,6 +66,7 @@
 * 1075: Remaining 2
   ...
 * 1078: Times tables
+* 1079: Weighted Averages
   ...
 * [1094]: Expriments Stats
 * 1095: Sequence I & J
