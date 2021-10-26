@@ -99,7 +99,8 @@
 * 1155: S Sequence
 * 1156: S Sequence II
   ...
-* 1164:  Perfect number
+* 1164: Perfect number
+* 1165: Prime Number 
   ...
 * 1168: Count leds
   ...
