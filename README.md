@@ -88,6 +88,7 @@
   ...
 * 1144: Logical Sequence
 * 1145: Logical Sequence 2
+* 1146: Growing Sequence
   ...
 * 1149: Summing Consecutive Integers
 * 1150: Exceeding Z
