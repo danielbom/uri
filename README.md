@@ -73,6 +73,7 @@
 * 1096: Sequence I & J
 * 1097: Sequence I & J
 * 1098: Sequence I & J
+* 1099: Sum of Consecutive Odd Numbers ||
   ...
 * 1101: Sequence Sum & Show
   ...
