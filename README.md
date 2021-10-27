@@ -68,6 +68,8 @@
 * 1078: Times tables
 * 1079: Weighted Averages
   ...
+* [1089]: Musical Loop
+  ...
 * [1094]: Expriments Stats
 * 1095: Sequence I & J
 * 1096: Sequence I & J
