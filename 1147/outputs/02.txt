@@ -1,0 +1,6 @@
+Caso de Teste #1: 2 movimento(s).
+Caso de Teste #2: 4 movimento(s).
+Caso de Teste #3: 2 movimento(s).
+Caso de Teste #4: 4 movimento(s).
+Caso de Teste #5: 2 movimento(s).
+Caso de Teste #6: 4 movimento(s).
