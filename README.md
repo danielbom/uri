@@ -82,7 +82,7 @@
 * 1101: Sequence Sum & Show
   ...
 * 1113: Ascending and Descending
-  ...
+* 1114: Fixed Password
 * 1115: Quadrant
 * 1116: Dividing X by Y
 * 1117: Score Validation
