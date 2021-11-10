@@ -86,6 +86,7 @@
 * 1115: Quadrant
 * 1116: Dividing X by Y
 * 1117: Score Validation
+* 1118: Several Scores with Validation
   ...
 * 1129: Optical Reader
   ...
