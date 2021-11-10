@@ -95,7 +95,7 @@
 * 1134: Type of Fuel
   ...
 * 1142: PUM
-  ...
+* 1143: Squared and Cubic
 * 1144: Logical Sequence
 * 1145: Logical Sequence 2
 * 1146: Growing Sequence
