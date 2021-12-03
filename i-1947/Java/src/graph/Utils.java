@@ -3,12 +3,14 @@ package graph;
 import java.util.*;
 
 public class Utils {
+    public static final Integer DISTANCE_SENTINEL = null;
+
     public static List<List<Integer>> makeMatrix(Integer n) {
         List<List<Integer>> matrix = new ArrayList<List<Integer>>(n);
         for (int i = 0; i < n; i++) {
             List<Integer> row = new ArrayList<Integer>(n);
             for (int j = 0; j < n; j++) {
-                row.add(0);
+                row.add(DISTANCE_SENTINEL);
             }
             matrix.add(row);
         }
@@ -27,5 +29,9 @@ public class Utils {
             }
             System.out.println("]");
         });
+    }
+
+    public static boolean isSentinel(Integer distance) {
+        return distance == DISTANCE_SENTINEL;
     }
 }

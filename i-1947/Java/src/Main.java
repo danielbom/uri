@@ -2,12 +2,13 @@ import java.util.*;
 
 import graph.*;
 import graph.algorithms.*;
+import problem.PlanTouristTravel;
 
 public class Main {
     private static Scanner scan = new Scanner(System.in);
-    private static Integer n;
-    private static Integer m;
-    private static Integer t;
+    private static Integer streetLimit;
+    private static Integer numberOfStreets;
+    private static Integer numberOfTourists;
     private static Graph streetGraph;
     private static MinDistances minDistances;
     private static PlanTouristTravel planTouristTravel;
@@ -23,39 +24,39 @@ public class Main {
 
     private static void readSpecification() {
         List<Integer> firstLine = readInts();
-        n = firstLine.get(0);
-        m = firstLine.get(1);
-        t = firstLine.get(2);
+        streetLimit = firstLine.get(0);
+        numberOfStreets = firstLine.get(1);
+        numberOfTourists = firstLine.get(2);
     }
 
     private static void buildGraph() {
-        if (m * 10 < n) {
+        if (numberOfStreets * 10 < streetLimit) {
             streetGraph = new BidirectionalGraphSparse();
         } else {
-            streetGraph = new BidirectionalGraphMatrix2(n);
+            streetGraph = new BidirectionalGraphMatrix2(streetLimit);
         }
 
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < numberOfStreets; i++) {
             List<Integer> streetLine = readInts();
 
-            Integer a = streetLine.get(0) - 1;
-            Integer b = streetLine.get(1) - 1;
-            Integer c = streetLine.get(2);
+            Integer origin = streetLine.get(0) - 1;
+            Integer destiny = streetLine.get(1) - 1;
+            Integer distance = streetLine.get(2);
 
-            streetGraph.addVertex(a, b, c);
+            streetGraph.addVertex(origin, destiny, distance);
         }
 
-        // minDistances = new FloydWarshallMinDistances(n, streetGraph);
-        minDistances = new DijkstraMinDistances(n, streetGraph);
+        // minDistances = new FloydWarshallMinDistances(streetLimit, streetGraph);
+        minDistances = new DijkstraMinDistances(streetLimit, streetGraph);
     }
 
     private static void saveTouristsTravel() {
         planTouristTravel = new PlanTouristTravel(minDistances);
-        for (int i = 0; i < t; i++) {
+        for (int i = 0; i < numberOfTourists; i++) {
             List<Integer> touristLine = readInts();
-            Integer o = touristLine.get(0) - 1;
-            Integer d = touristLine.get(1) - 1;
-            planTouristTravel.addTravel(o, d);
+            Integer origin = touristLine.get(0) - 1;
+            Integer destiny = touristLine.get(1) - 1;
+            planTouristTravel.addTravel(origin, destiny);
         }
     }
 

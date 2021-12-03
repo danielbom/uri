@@ -29,10 +29,10 @@ public class BidirectionalGraphSparse implements Graph {
     public Integer getVertexValue(Integer src, Integer dst) {
         Map<Integer, Integer> attach = graph.get(src);
         if (attach == null) {
-            return 0;
+            return Utils.DISTANCE_SENTINEL;
         } else {
             Integer distance = attach.get(dst);
-            return distance == null ? 0 : distance;
+            return distance == null ? Utils.DISTANCE_SENTINEL : distance;
         }
     }
 

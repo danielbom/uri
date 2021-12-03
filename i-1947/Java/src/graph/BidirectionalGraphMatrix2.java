@@ -7,11 +7,15 @@ public class BidirectionalGraphMatrix2 implements Graph {
     private List<List<Integer>> graph;
 
     public BidirectionalGraphMatrix2(Integer n) {
+        createTriangleMatrixGraph(n);
+    }
+
+    private void createTriangleMatrixGraph(Integer n) {
         graph = new ArrayList<List<Integer>>(n);
         for (int i = 0; i < n; i++) {
             List<Integer> row = new ArrayList<Integer>(i + 1);
             for (int j = i + 1; j >= 0; j--) {
-                row.add(0);
+                row.add(Utils.DISTANCE_SENTINEL);
             }
             graph.add(row);
         }
@@ -37,7 +41,7 @@ public class BidirectionalGraphMatrix2 implements Graph {
         int n = graph.size();
         for (int i = 0; i < n; i++) {
             Integer distance = getVertexValue(node, i);
-            if (distance != 0) {
+            if (!Utils.isSentinel(distance)) {
                 consumer.accept(i, distance);
             }
         }

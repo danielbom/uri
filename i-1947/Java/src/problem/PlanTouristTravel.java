@@ -1,3 +1,5 @@
+package problem;
+
 import java.util.*;
 
 import graph.algorithms.MinDistances;

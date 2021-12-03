@@ -20,16 +20,25 @@ public class FloydWarshallMinDistances implements MinDistances {
     private void preComputeDistances() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                Integer c = graph.getVertexValue(i, j);
-                Integer v = c == 0 && i != j ? 101 : c;
-                distances.get(i).set(j, v);
+                Integer distance = graph.getVertexValue(i, j);
+                if (Utils.isSentinel(distance)) {
+                    distances.get(i).set(j, Integer.MAX_VALUE);
+                } else {
+                    distances.get(i).set(j, distance);
+                }
             }
         }
 
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    Integer distanceSum = distances.get(i).get(k) + distances.get(k).get(j);
+                    Integer d1 = distances.get(i).get(k);
+                    if (d1 == Integer.MAX_VALUE)
+                        continue;
+                    Integer d2 = distances.get(k).get(j);
+                    if (d2 == Integer.MAX_VALUE)
+                        continue;
+                    Integer distanceSum = d1 + d2;
                     if (distances.get(i).get(j) > distanceSum) {
                         distances.get(i).set(j, distanceSum);
                     }

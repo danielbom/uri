@@ -23,7 +23,7 @@ public class BidirectionalGraphMatrix implements Graph {
         int n = graph.size();
         for (int i = 0; i < n; i++) {
             Integer distance = getVertexValue(node, i);
-            if (distance != 0) {
+            if (!Utils.isSentinel(distance)) {
                 consumer.accept(i, distance);
             }
         }
