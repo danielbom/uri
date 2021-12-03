@@ -2,13 +2,14 @@ import java.util.*;
 
 import graph.*;
 import graph.algorithms.*;
-import problem.PlanTouristTravel;
+import graph.structures.*;
+import problem.*;
 
 public class Main {
     private static Scanner scan = new Scanner(System.in);
-    private static Integer streetLimit;
-    private static Integer numberOfStreets;
-    private static Integer numberOfTourists;
+    private static int streetLimit;
+    private static int streetsCount;
+    private static int touristsCount;
     private static Graph streetGraph;
     private static MinDistances minDistances;
     private static PlanTouristTravel planTouristTravel;
@@ -25,23 +26,19 @@ public class Main {
     private static void readSpecification() {
         List<Integer> firstLine = readInts();
         streetLimit = firstLine.get(0);
-        numberOfStreets = firstLine.get(1);
-        numberOfTourists = firstLine.get(2);
+        streetsCount = firstLine.get(1);
+        touristsCount = firstLine.get(2);
     }
 
     private static void buildGraph() {
-        if (numberOfStreets * 10 < streetLimit) {
-            streetGraph = new BidirectionalGraphSparse();
-        } else {
-            streetGraph = new BidirectionalGraphMatrix2(streetLimit);
-        }
+        streetGraph = new BidirectionalGraphSparse2(streetLimit);
 
-        for (int i = 0; i < numberOfStreets; i++) {
+        for (int i = 0; i < streetsCount; i++) {
             List<Integer> streetLine = readInts();
 
-            Integer origin = streetLine.get(0) - 1;
-            Integer destiny = streetLine.get(1) - 1;
-            Integer distance = streetLine.get(2);
+            int origin = streetLine.get(0) - 1;
+            int destiny = streetLine.get(1) - 1;
+            int distance = streetLine.get(2);
 
             streetGraph.addVertex(origin, destiny, distance);
         }
@@ -51,11 +48,11 @@ public class Main {
     }
 
     private static void saveTouristsTravel() {
-        planTouristTravel = new PlanTouristTravel(minDistances);
-        for (int i = 0; i < numberOfTourists; i++) {
+        planTouristTravel = new PlanTouristTravel2(touristsCount, minDistances);
+        for (int i = 0; i < touristsCount; i++) {
             List<Integer> touristLine = readInts();
-            Integer origin = touristLine.get(0) - 1;
-            Integer destiny = touristLine.get(1) - 1;
+            int origin = touristLine.get(0) - 1;
+            int destiny = touristLine.get(1) - 1;
             planTouristTravel.addTravel(origin, destiny);
         }
     }

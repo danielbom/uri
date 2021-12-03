@@ -1,7 +1,10 @@
-package graph;
+package graph.structures;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+
+import graph.Graph;
+import graph.Utils;
 
 public class BidirectionalGraphMatrix implements Graph {
     private List<List<Integer>> graph;
@@ -10,19 +13,19 @@ public class BidirectionalGraphMatrix implements Graph {
         graph = Utils.makeMatrix(n);
     }
 
-    public void addVertex(Integer a, Integer b, Integer c) {
-        graph.get(a).set(b, c);
-        graph.get(b).set(a, c);
+    public void addVertex(int source, int destiny, int distance) {
+        graph.get(source).set(destiny, distance);
+        graph.get(destiny).set(source, distance);
     }
 
-    public Integer getVertexValue(Integer src, Integer dst) {
-        return graph.get(src).get(dst);
+    public int getVertexValue(int source, int destiny) {
+        return graph.get(source).get(destiny);
     }
 
-    public void visitAdjacentNodesOf(Integer node, BiConsumer<Integer, Integer> consumer) {
+    public void visitAdjacentNodesOf(int node, BiConsumer<Integer, Integer> consumer) {
         int n = graph.size();
         for (int i = 0; i < n; i++) {
-            Integer distance = getVertexValue(node, i);
+            int distance = getVertexValue(node, i);
             if (!Utils.isSentinel(distance)) {
                 consumer.accept(i, distance);
             }

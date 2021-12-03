@@ -4,44 +4,43 @@ import java.util.*;
 
 import graph.Graph;
 
+/**
+ * Picked from
+ * https://github.com/IvanIsCoding/OlympiadSolutions/blob/aeb67753f80a936c15ddede577ecdf10296ba6f2/URI/1947.cpp
+ */
 public class DijkstraMinDistances implements MinDistances {
-    class QueueItem implements Comparable<QueueItem> {
-        public Integer distance;
-        public Integer node;
+    private class QueueItem implements Comparable<QueueItem> {
+        public int distance;
+        public int id;
 
-        public QueueItem(Integer d, Integer n) {
-            distance = d;
-            node = n;
+        public QueueItem(int theId, int theDistance) {
+            id = theId;
+            distance = theDistance;
         }
 
         public int compareTo(QueueItem other) {
-            return distance.compareTo(other.distance);
-        }
-
-        @Override
-        public String toString() {
-            return "QueueItem(node=" + node + ", distance=" + distance + ")";
+            return Integer.compare(distance, other.distance);
         }
     }
 
-    class Vertex {
-        public Integer src;
-        public Integer dst;
+    private class Vertex {
+        public int source;
+        public int destiny;
 
-        public Vertex(Integer s, Integer d) {
-            src = s;
-            dst = d;
+        public Vertex(int theSource, int theDestiny) {
+            source = theSource;
+            destiny = theDestiny;
         }
 
         @Override
         public String toString() {
-            return src + "-" + dst;
+            return source + "-" + destiny;
         }
 
         @Override
         public int hashCode() {
-            int s = src.hashCode();
-            int d = dst.hashCode();
+            int s = source;
+            int d = destiny;
             return (int) (s ^ (s >> 32)) + (d ^ (d >> 32));
         }
 
@@ -52,7 +51,7 @@ public class DijkstraMinDistances implements MinDistances {
 
             if (other instanceof Vertex) {
                 Vertex o = (Vertex) other;
-                return src == o.src && dst == o.dst;
+                return source == o.source && destiny == o.destiny;
             } else {
                 return false;
             }
@@ -61,40 +60,40 @@ public class DijkstraMinDistances implements MinDistances {
 
     private Map<Vertex, Integer> computed;
     private Graph graph;
-    private Integer n;
+    private Integer nodesCount;
 
-    public DijkstraMinDistances(Integer nodes, Graph theGraph) {
+    public DijkstraMinDistances(Integer theNodesCount, Graph theGraph) {
         computed = new HashMap<Vertex, Integer>();
         graph = theGraph;
-        n = nodes;
+        nodesCount = theNodesCount;
     }
 
-    public Integer getMinDistance(Integer src, Integer dst) {
-        final Vertex vertex = new Vertex(src, dst);
+    public int getMinDistance(int source, int destiny) {
+        final Vertex vertex = new Vertex(source, destiny);
         if (computed.containsKey(vertex)) {
             return computed.get(vertex);
         }
 
-        boolean[] processed = new boolean[n];
-        for (int i = 0; i < n; i++) {
+        boolean[] processed = new boolean[nodesCount];
+        for (int i = 0; i < nodesCount; i++) {
             processed[i] = false;
         }
 
         Queue<QueueItem> queue = new PriorityQueue<QueueItem>();
-        queue.add(new QueueItem(0, src));
+        queue.add(new QueueItem(source, 0));
 
         while (!queue.isEmpty()) {
             QueueItem item = queue.poll();
 
-            if (processed[item.node]) {
+            if (processed[item.id]) {
                 continue;
             }
 
-            processed[item.node] = true;
-            computed.put(new Vertex(src, item.node), item.distance);
+            processed[item.id] = true;
+            computed.put(new Vertex(source, item.id), item.distance);
 
-            graph.visitAdjacentNodesOf(item.node, (node, distance) -> {
-                queue.add(new QueueItem(distance + item.distance, node));
+            graph.visitAdjacentNodesOf(item.id, (node, distance) -> {
+                queue.add(new QueueItem(node, distance + item.distance));
             });
         }
 

@@ -1,29 +1,44 @@
 import java.util.*;
 import java.util.function.BiConsumer;
 
-interface MinDistances {
-    public Integer getMinDistance(Integer src, Integer dst);
-}
+/**
+ * Based on
+ * https://github.com/IvanIsCoding/OlympiadSolutions/blob/aeb67753f80a936c15ddede577ecdf10296ba6f2/URI/1947.cpp
+ */
 
 interface GraphAccessor {
-    public Integer getVertexValue(Integer src, Integer dst);
+    public int getVertexValue(int source, int destiny);
+
+    public void visitAdjacentNodesOf(int node, BiConsumer<Integer, Integer> consumer);
 }
 
 interface Graph extends GraphAccessor {
-    public void addVertex(Integer src, Integer dst, Integer distance);
+    public void addVertex(int source, int destiny, int distance);
 
     public void print();
+}
 
-    public void visitAdjacentNodesOf(Integer node, BiConsumer<Integer, Integer> consumer);
+interface MinDistances {
+    public int getMinDistance(int source, int destiny);
+}
+
+interface PlanTouristTravel {
+    public void addTravel(int origin, int destiny);
+
+    public void computeMinDistance();
+
+    public int getTotalDistance();
 }
 
 class Utils {
+    public static final int DISTANCE_SENTINEL = -1;
+
     public static List<List<Integer>> makeMatrix(Integer n) {
         List<List<Integer>> matrix = new ArrayList<List<Integer>>(n);
         for (int i = 0; i < n; i++) {
             List<Integer> row = new ArrayList<Integer>(n);
             for (int j = 0; j < n; j++) {
-                row.add(0);
+                row.add(DISTANCE_SENTINEL);
             }
             matrix.add(row);
         }
@@ -43,146 +58,110 @@ class Utils {
             System.out.println("]");
         });
     }
+
+    public static boolean isSentinel(Integer distance) {
+        return distance == DISTANCE_SENTINEL;
+    }
 }
 
-class BidirectionalGraphSparse implements Graph {
-    private Map<Integer, Map<Integer, Integer>> graph;
+class BidirectionalGraphSparse2 implements Graph {
+    private class Vertex {
+        public Integer node;
+        public Integer distance;
 
-    public BidirectionalGraphSparse() {
-        graph = new HashMap<Integer, Map<Integer, Integer>>();
-    }
-
-    private Map<Integer, Integer> addNodeIfNotExists(Integer node) {
-        Map<Integer, Integer> attach = graph.get(node);
-        if (attach == null) {
-            attach = new HashMap<Integer, Integer>();
-            graph.put(node, attach);
+        public Vertex(Integer theNode, Integer theDistance) {
+            node = theNode;
+            distance = theDistance;
         }
-        return attach;
+    }
+
+    public static final Integer MAX_NODES = (int) 1e4 + 10;
+
+    private List<List<Vertex>> graph;
+
+    public BidirectionalGraphSparse2(Integer size) {
+        createGraph(size);
+    }
+
+    private void createGraph(Integer size) {
+        graph = new ArrayList<List<Vertex>>(size);
+        for (int i = 0; i < size; i++) {
+            graph.add(new ArrayList<>());
+        }
     }
 
     @Override
-    public void addVertex(Integer src, Integer dst, Integer distance) {
-        addNodeIfNotExists(src).put(dst, distance);
-        addNodeIfNotExists(dst).put(src, distance);
+    public void addVertex(int source, int destiny, int distance) {
+        graph.get(source).add(new Vertex(destiny, distance));
+        graph.get(destiny).add(new Vertex(source, distance));
     }
 
     @Override
-    public Integer getVertexValue(Integer src, Integer dst) {
-        Map<Integer, Integer> attach = graph.get(src);
-        if (attach == null) {
-            return 0;
-        } else {
-            Integer distance = attach.get(dst);
-            return distance == null ? 0 : distance;
+    public int getVertexValue(int source, int destiny) {
+        for (Vertex vertex : graph.get(source)) {
+            if (vertex.node == destiny) {
+                return vertex.distance;
+            }
+        }
+        return Utils.DISTANCE_SENTINEL;
+    }
+
+    @Override
+    public void visitAdjacentNodesOf(int node, BiConsumer<Integer, Integer> consumer) {
+        for (Vertex vertex : graph.get(node)) {
+            consumer.accept(vertex.node, vertex.distance);
         }
     }
 
     @Override
     public void print() {
-        System.out.println("BidirectionalGraphSparse()");
-        graph.forEach((src, attach) -> {
-            System.out.print(src + " => ");
-            attach.forEach((dst, distance) -> {
-                System.out.print("(" + dst + ", " + distance + ")");
-            });
-            System.out.println();
-        });
-    }
-
-    @Override
-    public void visitAdjacentNodesOf(Integer node, BiConsumer<Integer, Integer> consumer) {
-        Map<Integer, Integer> attach = graph.get(node);
-        if (attach != null) {
-            attach.forEach(consumer);
-        }
-    }
-}
-
-class BidirectionalGraphMatrix2 implements Graph {
-    private List<List<Integer>> graph;
-
-    public BidirectionalGraphMatrix2(Integer n) {
-        graph = new ArrayList<List<Integer>>(n);
-        for (int i = 0; i < n; i++) {
-            List<Integer> row = new ArrayList<Integer>(i + 1);
-            for (int j = i + 1; j >= 0; j--) {
-                row.add(0);
-            }
-            graph.add(row);
-        }
-    }
-
-    public void addVertex(Integer src, Integer dst, Integer distance) {
-        if (src >= dst) {
-            graph.get(src).set(dst, distance);
-        } else {
-            addVertex(dst, src, distance);
-        }
-    }
-
-    public Integer getVertexValue(Integer src, Integer dst) {
-        if (src >= dst) {
-            return graph.get(src).get(dst);
-        } else {
-            return getVertexValue(dst, src);
-        }
-    }
-
-    public void visitAdjacentNodesOf(Integer node, BiConsumer<Integer, Integer> consumer) {
+        System.out.println("BidirectionalGraphSparse2()");
         int n = graph.size();
         for (int i = 0; i < n; i++) {
-            Integer distance = getVertexValue(node, i);
-            if (distance != 0) {
-                consumer.accept(i, distance);
+            if (!graph.get(i).isEmpty()) {
+                System.out.print(i + " => ");
+                for (Vertex vertex : graph.get(i)) {
+                    System.out.print("(" + vertex.node + ", " + vertex.distance + ")");
+                }
+                System.out.println();
             }
         }
-    }
-
-    public void print() {
-        System.out.println("BidirecionalGraphMatrix()");
-        Utils.printMatrix(graph);
     }
 }
 
 class DijkstraMinDistances implements MinDistances {
-    class QueueItem implements Comparable<QueueItem> {
-        public Integer distance;
-        public Integer node;
+    private class QueueItem implements Comparable<QueueItem> {
+        public int distance;
+        public int id;
 
-        public QueueItem(Integer d, Integer n) {
-            distance = d;
-            node = n;
+        public QueueItem(int theId, int theDistance) {
+            id = theId;
+            distance = theDistance;
         }
 
         public int compareTo(QueueItem other) {
-            return distance.compareTo(other.distance);
-        }
-
-        @Override
-        public String toString() {
-            return "QueueItem(node=" + node + ", distance=" + distance + ")";
+            return Integer.compare(distance, other.distance);
         }
     }
 
-    class Vertex {
-        public Integer src;
-        public Integer dst;
+    private class Vertex {
+        public int source;
+        public int destiny;
 
-        public Vertex(Integer s, Integer d) {
-            src = s;
-            dst = d;
+        public Vertex(int s, int d) {
+            source = s;
+            destiny = d;
         }
 
         @Override
         public String toString() {
-            return src + "-" + dst;
+            return source + "-" + destiny;
         }
 
         @Override
         public int hashCode() {
-            int s = src.hashCode();
-            int d = dst.hashCode();
+            int s = source;
+            int d = destiny;
             return (int) (s ^ (s >> 32)) + (d ^ (d >> 32));
         }
 
@@ -193,7 +172,7 @@ class DijkstraMinDistances implements MinDistances {
 
             if (other instanceof Vertex) {
                 Vertex o = (Vertex) other;
-                return src == o.src && dst == o.dst;
+                return source == o.source && destiny == o.destiny;
             } else {
                 return false;
             }
@@ -202,40 +181,40 @@ class DijkstraMinDistances implements MinDistances {
 
     private Map<Vertex, Integer> computed;
     private Graph graph;
-    private Integer n;
+    private Integer nodesCount;
 
-    public DijkstraMinDistances(Integer nodes, Graph theGraph) {
+    public DijkstraMinDistances(Integer theNodesCount, Graph theGraph) {
         computed = new HashMap<Vertex, Integer>();
         graph = theGraph;
-        n = nodes;
+        nodesCount = theNodesCount;
     }
 
-    public Integer getMinDistance(Integer src, Integer dst) {
-        final Vertex vertex = new Vertex(src, dst);
+    public int getMinDistance(int source, int destiny) {
+        final Vertex vertex = new Vertex(source, destiny);
         if (computed.containsKey(vertex)) {
             return computed.get(vertex);
         }
 
-        boolean[] processed = new boolean[n];
-        for (int i = 0; i < n; i++) {
+        boolean[] processed = new boolean[nodesCount];
+        for (int i = 0; i < nodesCount; i++) {
             processed[i] = false;
         }
 
         Queue<QueueItem> queue = new PriorityQueue<QueueItem>();
-        queue.add(new QueueItem(0, src));
+        queue.add(new QueueItem(source, 0));
 
         while (!queue.isEmpty()) {
             QueueItem item = queue.poll();
 
-            if (processed[item.node]) {
+            if (processed[item.id]) {
                 continue;
             }
 
-            processed[item.node] = true;
-            computed.put(new Vertex(src, item.node), item.distance);
+            processed[item.id] = true;
+            computed.put(new Vertex(source, item.id), item.distance);
 
-            graph.visitAdjacentNodesOf(item.node, (node, distance) -> {
-                queue.add(new QueueItem(distance + item.distance, node));
+            graph.visitAdjacentNodesOf(item.id, (node, distance) -> {
+                queue.add(new QueueItem(node, distance + item.distance));
             });
         }
 
@@ -243,104 +222,124 @@ class DijkstraMinDistances implements MinDistances {
     }
 }
 
-class PlanTouristTravel {
-    private static Map<Integer, List<Integer>> tourists;
-    private Integer totalDistance;
-    private Integer currentPosition;
-    private MinDistances minDistances;
+class PlanTouristTravel2 implements PlanTouristTravel {
+    private class Travel {
+        public int source;
+        public int destiny;
 
-    public PlanTouristTravel(MinDistances theMinDistances) {
-        tourists = new HashMap<Integer, List<Integer>>();
-        totalDistance = 0;
-        currentPosition = 0;
-        minDistances = theMinDistances;
+        Travel(int theSource, int theDestiny) {
+            source = theSource;
+            destiny = theDestiny;
+        }
     }
 
-    public void addTravel(Integer origin, Integer destiny) {
-        if (!tourists.containsKey(origin)) {
-            tourists.put(origin, new LinkedList<Integer>());
-        }
+    public static final int MAX_COSTS = 17;
+    public static final int MAX_BEST_COSTS = (1 << 16) + 100; // + 65k
 
-        tourists.get(origin).add(destiny);
+    private List<Travel> travels;
+    private MinDistances minDistances;
+    private int touristsCountIncremented;
+    private int possibilities;
+    private int totalDistance;
+
+    private int[][] costs;
+    private int[][] bestCosts;
+
+    public PlanTouristTravel2(int touristsCount, MinDistances theMinDistances) {
+        touristsCountIncremented = touristsCount + 1;
+        possibilities = 1 << touristsCountIncremented;
+
+        minDistances = theMinDistances;
+        totalDistance = 0;
+        costs = new int[MAX_COSTS][MAX_COSTS];
+        bestCosts = new int[MAX_COSTS][MAX_BEST_COSTS];
+        travels = new ArrayList<Travel>(touristsCountIncremented);
+        travels.add(new Travel(0, 0));
+    }
+
+    public void addTravel(int source, int destiny) {
+        travels.add(new Travel(source, destiny));
+        int distance = minDistances.getMinDistance(source, destiny);
+        updateDistance(distance);
     }
 
     public void computeMinDistance() {
-        while (hasTravel()) {
-            if (hasTravelFrom(currentPosition)) {
-                attendTravel();
-            } else {
-                findNextTravel();
-            }
-        }
-        goToBegin();
+        int initialPosition = 0;
+        int initialBitmask = 1;
+        // The initial bitmask are 1 to be used as a binary mapper
+        // 0001, 0010, 0011, ...
+        computeBaseCosts();
+        initializeBestCosts();
+        updateDistance(recursiveSolveBestCost(initialPosition, initialBitmask));
     }
 
-    public Integer getTotalDistance() {
+    public int getTotalDistance() {
         return totalDistance;
     }
 
-    private void goToBegin() {
-        updateDistanceToPosition(0);
-    }
-
-    private void attendTravel() {
-        List<Integer> travels = tourists.get(currentPosition);
-        Integer destiny = travels.remove(0);
-
-        if (travels.isEmpty()) {
-            tourists.remove(currentPosition);
-        }
-
-        updateDistanceToPosition(destiny);
-    }
-
-    private void findNextTravel() {
-        Integer minTouristPosition = null;
-        Integer minDistance = Integer.MAX_VALUE;
-        for (Map.Entry<Integer, List<Integer>> entry : tourists.entrySet()) {
-            Integer d = minDistances.getMinDistance(currentPosition, entry.getKey());
-            if (d < minDistance) {
-                minDistance = d;
-                minTouristPosition = entry.getKey();
+    private void computeBaseCosts() {
+        for (int i = 0; i < touristsCountIncremented; i++) {
+            for (int j = 0; j < touristsCountIncremented; j++) {
+                int source = travels.get(i).destiny;
+                int destiny = travels.get(j).source;
+                int distance = minDistances.getMinDistance(source, destiny);
+                costs[i][j] = distance;
             }
         }
-        if (minTouristPosition != null) {
-            updateDistanceToPosition(minTouristPosition, minDistance);
+    }
+
+    private void initializeBestCosts() {
+        for (int i = 0; i < touristsCountIncremented; i++) {
+            for (int j = 0; j < possibilities; j++) {
+                bestCosts[i][j] = -1;
+            }
         }
     }
 
-    private boolean hasTravel() {
-        return !tourists.isEmpty();
+    private int recursiveSolveBestCost(int position, int bitmask) {
+        if (isBestCostInitialized(position, bitmask)) {
+            return bestCosts[position][bitmask];
+        }
+
+        if (bitmask == possibilities - 1) {
+            int bestCost = costs[position][0];
+            bestCosts[position][bitmask] = bestCost;
+            return bestCost;
+        }
+
+        int best = (int) 1e8;
+        for (int nextTourist = 0; nextTourist < touristsCountIncremented; nextTourist++) {
+            int nextTouristBit = 1 << nextTourist;
+            if (position != nextTourist && theNextTouristIsNotMarked(bitmask, nextTouristBit)) {
+                int bitmaskMarkedTourist = bitmask | nextTouristBit;
+                int nextTouristBestCost = recursiveSolveBestCost(nextTourist, bitmaskMarkedTourist);
+                int nextBestCost = costs[position][nextTourist] + nextTouristBestCost;
+                best = Math.min(best, nextBestCost);
+            }
+        }
+
+        bestCosts[position][bitmask] = best;
+        return best;
     }
 
-    private boolean hasTravelFrom(Integer position) {
-        return tourists.containsKey(position);
+    private boolean theNextTouristIsNotMarked(int bitmask, int nextTouristBit) {
+        return (bitmask & nextTouristBit) == 0;
     }
 
-    private void updateDistanceToPosition(Integer position) {
-        Integer minDistance = minDistances.getMinDistance(currentPosition, position);
-        updateDistanceToPosition(position, minDistance);
+    private boolean isBestCostInitialized(int position, int bitmask) {
+        return bestCosts[position][bitmask] != -1;
     }
 
-    private void updateDistanceToPosition(Integer position, Integer minDistance) {
-        updateCurrentPosition(position);
-        updateDistance(minDistance);
-    }
-
-    private void updateDistance(Integer minDistance) {
-        totalDistance += minDistance;
-    }
-
-    private void updateCurrentPosition(Integer position) {
-        currentPosition = position;
+    private void updateDistance(int distance) {
+        totalDistance += distance;
     }
 }
 
 public class Main {
     private static Scanner scan = new Scanner(System.in);
-    private static Integer n;
-    private static Integer m;
-    private static Integer t;
+    private static int streetLimit;
+    private static int streetsCount;
+    private static int touristsCount;
     private static Graph streetGraph;
     private static MinDistances minDistances;
     private static PlanTouristTravel planTouristTravel;
@@ -356,39 +355,35 @@ public class Main {
 
     private static void readSpecification() {
         List<Integer> firstLine = readInts();
-        n = firstLine.get(0);
-        m = firstLine.get(1);
-        t = firstLine.get(2);
+        streetLimit = firstLine.get(0);
+        streetsCount = firstLine.get(1);
+        touristsCount = firstLine.get(2);
     }
 
     private static void buildGraph() {
-        if (m * 10 < n) {
-            streetGraph = new BidirectionalGraphSparse();
-        } else {
-            streetGraph = new BidirectionalGraphMatrix2(n);
-        }
+        streetGraph = new BidirectionalGraphSparse2(streetLimit);
 
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < streetsCount; i++) {
             List<Integer> streetLine = readInts();
 
-            Integer a = streetLine.get(0) - 1;
-            Integer b = streetLine.get(1) - 1;
-            Integer c = streetLine.get(2);
+            int origin = streetLine.get(0) - 1;
+            int destiny = streetLine.get(1) - 1;
+            int distance = streetLine.get(2);
 
-            streetGraph.addVertex(a, b, c);
+            streetGraph.addVertex(origin, destiny, distance);
         }
 
-        // minDistances = new FloydWarshallMinDistances(n, streetGraph);
-        minDistances = new DijkstraMinDistances(n, streetGraph);
+        // minDistances = new FloydWarshallMinDistances(streetLimit, streetGraph);
+        minDistances = new DijkstraMinDistances(streetLimit, streetGraph);
     }
 
     private static void saveTouristsTravel() {
-        planTouristTravel = new PlanTouristTravel(minDistances);
-        for (int i = 0; i < t; i++) {
+        planTouristTravel = new PlanTouristTravel2(touristsCount, minDistances);
+        for (int i = 0; i < touristsCount; i++) {
             List<Integer> touristLine = readInts();
-            Integer o = touristLine.get(0) - 1;
-            Integer d = touristLine.get(1) - 1;
-            planTouristTravel.addTravel(o, d);
+            int origin = touristLine.get(0) - 1;
+            int destiny = touristLine.get(1) - 1;
+            planTouristTravel.addTravel(origin, destiny);
         }
     }
 

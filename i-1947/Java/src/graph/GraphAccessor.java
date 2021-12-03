@@ -1,5 +1,9 @@
 package graph;
 
+import java.util.function.BiConsumer;
+
 public interface GraphAccessor {
-    public Integer getVertexValue(Integer src, Integer dst);
+    public int getVertexValue(int source, int destiny);
+
+    public void visitAdjacentNodesOf(int node, BiConsumer<Integer, Integer> consumer);
 }
