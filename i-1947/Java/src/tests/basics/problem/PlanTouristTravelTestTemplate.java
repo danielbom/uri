@@ -45,6 +45,9 @@ public abstract class PlanTouristTravelTestTemplate {
     }
 
     public void test() {
+        Timer timer = new Timer();
+        timer.startTimer();
+
         int touristsCount = getTouristsCount();
         int streetsCount = getStreetLimit();
 
@@ -67,7 +70,9 @@ public abstract class PlanTouristTravelTestTemplate {
         Test.testMessage(message);
         computeDistance();
         checkDistance();
-        Test.endTestMessage(message);
+
+        timer.endTimer();
+        Test.endTestMessage(message + " :: time " + timer.getTotalTimeSeconds() + " seconds");
     }
 
     protected abstract void buildGraph();

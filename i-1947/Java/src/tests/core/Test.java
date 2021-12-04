@@ -37,8 +37,6 @@ public class Test {
     }
 
     public static String getClassName(Object object) {
-        String className = object.getClass().getName();
-        int index = className.lastIndexOf('.');
-        return index == -1 ? className : className.substring(index + 1);
+        return object.getClass().getSimpleName();
     }
 }

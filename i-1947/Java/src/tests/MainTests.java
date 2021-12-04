@@ -11,7 +11,14 @@ import tests.basics.min_distances.*;
 import tests.basics.problem.*;
 import tests.core.*;
 
-public class GraphTests {
+class PlanTouristTravelFactory1 implements PlanTouristTravelFactory {
+    @Override
+    public PlanTouristTravel create(MinDistances minDistances, Integer touristsCount) {
+        return new PlanTouristTravel1(minDistances);
+    }
+}
+
+public class MainTests {
     static String mkPath(String filePath) {
         String currentFileDirectory = Paths.get("").toFile().getAbsolutePath();
         return currentFileDirectory + "/" + filePath;
@@ -19,6 +26,7 @@ public class GraphTests {
 
     static void bidirectionalGraphTest(GraphFactory factory) {
         new BasicGraphTest(factory).test();
+        System.gc();
     }
 
     static void minDistanceTest( //
@@ -26,7 +34,9 @@ public class GraphTests {
             MinDistancesFactory minDistancesFactory //
     ) {
         new BasicMinDistanceTest1(graphFactory, minDistancesFactory).test();
+        System.gc();
         new BasicMinDistanceTest2(graphFactory, minDistancesFactory).test();
+        System.gc();
     }
 
     static void planTouristTravelTest(//
@@ -35,16 +45,24 @@ public class GraphTests {
             PlanTouristTravelFactory planTouristTravelFactory //
     ) {
         new PlanTouristTravelTest1(graphFactory, minDistancesFactory, planTouristTravelFactory).test();
+        System.gc();
         new PlanTouristTravelTest2(graphFactory, minDistancesFactory, planTouristTravelFactory).test();
+        System.gc();
     }
 
-    static void planTouristTravelFromFileTest(PlanTouristTravelFileTest.Input input) {
+    static void planTouristTravelFromFileTest( //
+            PlanTouristTravelFileTest.Input input, //
+            GraphFactory graphFactory, //
+            MinDistancesFactory minDistanceFactory, //
+            PlanTouristTravelFactory planTouristTravelFactory //
+    ) {
         new PlanTouristTravelFileTest( //
                 input, //
-                (n) -> new BidirectionalGraphSparse2(n), //
-                (g, n) -> new DijkstraMinDistances(n, g), //
-                (minDistances, touristsCount) -> new PlanTouristTravel2(touristsCount, minDistances) //
+                graphFactory, //
+                minDistanceFactory, //
+                planTouristTravelFactory //
         ).test();
+        System.gc();
     }
 
     public static void main(String[] args) {
@@ -62,13 +80,12 @@ public class GraphTests {
         );
 
         List<PlanTouristTravelFactory> planTouristTravelFactories = List.of(
-                (minDistances, touristsCount) -> new PlanTouristTravel1(minDistances), //
+                new PlanTouristTravelFactory1(), //
                 (minDistances, touristsCount) -> new PlanTouristTravel2(touristsCount, minDistances) //
         );
 
         List<PlanTouristTravelFileTest.Input> filePaths = List.of(
-                new PlanTouristTravelFileTest.Input(mkPath("../inputs/01.txt"), 9), //
-                new PlanTouristTravelFileTest.Input(mkPath("../inputs/02.txt"), 26) //
+                new PlanTouristTravelFileTest.Input(mkPath("../inputs/03.txt"), 4432) //
         );
 
         graphFactories.forEach(factory -> bidirectionalGraphTest(factory));
@@ -88,7 +105,24 @@ public class GraphTests {
         });
 
         filePaths.forEach(input -> {
-            planTouristTravelFromFileTest(input);
+            planTouristTravelFactories.forEach(planTouristTravelFactory -> {
+                if (planTouristTravelFactory instanceof PlanTouristTravelFactory1) {
+                    // PlanTouristTravel1 not works for random inputs, because they are greedy and
+                    // not find the best path to resolve travels
+                    return;
+                }
+
+                graphFactories.forEach(graphFactory -> {
+                    minDistancesFactories.forEach(minDistancesFactory -> {
+                        planTouristTravelFromFileTest( //
+                                input, //
+                                graphFactory, //
+                                minDistancesFactory, //
+                                planTouristTravelFactory //
+                        );
+                    });
+                });
+            });
         });
 
         Test.completeTest();
