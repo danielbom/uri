@@ -1,14 +1,14 @@
-package tests.basics.graph;
+package tests.graph;
 
-import graph.Graph;
 import graph.Utils;
+import graph.structures.Graph;
 import tests.core.GraphFactory;
 import tests.core.Test;
 
-public class BasicGraphTest {
+public class BasicBidirectionalGraphTest {
     private Graph graph;
 
-    public BasicGraphTest(GraphFactory factory) {
+    public BasicBidirectionalGraphTest(GraphFactory factory) {
         startupTest(factory);
     }
 

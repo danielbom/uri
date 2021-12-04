@@ -2,8 +2,8 @@ package graph.algorithms;
 
 import java.util.*;
 
-import graph.Graph;
 import graph.Pair;
+import graph.structures.Graph;
 
 /**
  * Picked from
@@ -31,44 +31,43 @@ public class DijkstraMinDistances implements MinDistances {
 
         @Override
         public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            } else if (other instanceof Vertex) {
-                return this.compareTo((Vertex) other) == 0;
+            if (other instanceof Vertex) {
+                return Pair.equals(this, (Vertex) other);
             } else {
                 return false;
             }
         }
     }
 
-    private Map<Vertex, Integer> computed;
+    private Map<Vertex, Integer> computed = new HashMap<Vertex, Integer>();
     private Graph graph;
     private Integer nodesCount;
+    private boolean[] processed;
+    private Queue<QueueItem> queue;
 
     public DijkstraMinDistances(Integer theNodesCount, Graph theGraph) {
-        computed = new HashMap<Vertex, Integer>();
         graph = theGraph;
         nodesCount = theNodesCount;
+        processed = new boolean[nodesCount];
+        queue = new PriorityQueue<QueueItem>(nodesCount);
     }
 
-    public int getMinDistance(int source, int destiny) {
+    public Integer getMinDistance(Integer source, Integer destiny) {
         final Vertex vertex = new Vertex(source, destiny);
         if (computed.containsKey(vertex)) {
             return computed.get(vertex);
         }
 
-        boolean[] processed = new boolean[nodesCount];
         for (int i = 0; i < nodesCount; i++) {
             processed[i] = false;
         }
 
-        Queue<QueueItem> queue = new PriorityQueue<QueueItem>();
         queue.add(new QueueItem(0, source));
 
         while (!queue.isEmpty()) {
             QueueItem item = queue.poll();
-            int itemId = item.getNode();
-            int itemDistance = item.getDistance();
+            Integer itemId = item.getNode();
+            Integer itemDistance = item.getDistance();
 
             if (!processed[itemId]) {
                 processed[itemId] = true;

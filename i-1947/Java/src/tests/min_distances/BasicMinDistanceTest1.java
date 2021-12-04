@@ -1,4 +1,4 @@
-package tests.basics.min_distances;
+package tests.min_distances;
 
 import tests.core.*;
 

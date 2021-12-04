@@ -1,7 +1,7 @@
-package tests.basics.problem;
+package tests.problem;
 
-import graph.*;
 import graph.algorithms.*;
+import graph.structures.Graph;
 import problem.PlanTouristTravel;
 import tests.core.*;
 
@@ -60,14 +60,14 @@ public abstract class PlanTouristTravelTestTemplate {
         Test.testMessage("Tourists count: " + touristsCount);
         minDistances = minDistancesFactory.create(graph, streetsCount);
         planTouristTravel = planTouristTravelFactory.create(minDistances, touristsCount);
-        addTouristsTravel();
 
         String planTouristTravelName = Test.getClassName(planTouristTravel);
         String graphName = Test.getClassName(graph);
         String minDistancesName = Test.getClassName(minDistances);
         String message = planTouristTravelName + " w/ " + graphName + " w/ " + minDistancesName;
-
         Test.testMessage(message);
+
+        addTouristsTravel();
         computeDistance();
         checkDistance();
 

@@ -2,8 +2,8 @@ package graph.algorithms;
 
 import java.util.*;
 
-import graph.GraphAccessor;
 import graph.Utils;
+import graph.structures.GraphAccessor;
 
 public class FloydWarshallMinDistances implements MinDistances {
     private int n;
@@ -18,9 +18,10 @@ public class FloydWarshallMinDistances implements MinDistances {
     }
 
     private void preComputeDistances() {
+        Integer max = Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                distances.get(i).set(j, i == j ? 0 : Integer.MAX_VALUE);
+                distances.get(i).set(j, i == j ? 0 : max);
             }
             final int node = i;
             graph.visitAdjacentNodesOf(i, (j, distance) -> {
@@ -31,13 +32,13 @@ public class FloydWarshallMinDistances implements MinDistances {
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    int d1 = distances.get(i).get(k);
-                    if (d1 == Integer.MAX_VALUE)
+                    Integer d1 = distances.get(i).get(k);
+                    if (d1.equals(max))
                         break;
-                    int d2 = distances.get(k).get(j);
-                    if (d2 == Integer.MAX_VALUE)
+                    Integer d2 = distances.get(k).get(j);
+                    if (d2.equals(max))
                         continue;
-                    int distanceSum = d1 + d2;
+                    Integer distanceSum = d1 + d2;
                     if (distances.get(i).get(j) > distanceSum) {
                         distances.get(i).set(j, distanceSum);
                     }
@@ -46,7 +47,7 @@ public class FloydWarshallMinDistances implements MinDistances {
         }
     }
 
-    public int getMinDistance(int src, int dst) {
+    public Integer getMinDistance(Integer src, Integer dst) {
         return distances.get(src).get(dst);
     }
 

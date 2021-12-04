@@ -1,28 +1,28 @@
 package graph;
 
-public class Pair<FIRST extends Comparable<FIRST>, SECOND extends Comparable<SECOND>> //
-        implements Comparable<Pair<FIRST, SECOND>> {
-    private FIRST first;
-    private SECOND second;
+public class Pair<F extends Comparable<F>, S extends Comparable<S>> //
+        implements Comparable<Pair<F, S>> {
+    private F first;
+    private S second;
 
-    public Pair(FIRST theFirst, SECOND theSecond) {
+    public Pair(F theFirst, S theSecond) {
         first = theFirst;
         second = theSecond;
     }
 
-    public FIRST getFirst() {
+    public F getFirst() {
         return first;
     }
 
-    public SECOND getSecond() {
+    public S getSecond() {
         return second;
     }
 
-    public void setFirst(FIRST first) {
+    public void setFirst(F first) {
         this.first = first;
     }
 
-    public void setSecond(SECOND second) {
+    public void setSecond(S second) {
         this.second = second;
     }
 
@@ -40,12 +40,23 @@ public class Pair<FIRST extends Comparable<FIRST>, SECOND extends Comparable<SEC
     }
 
     @Override
-    public int compareTo(Pair<FIRST, SECOND> o) {
+    public int compareTo(Pair<F, S> o) {
         int c1 = first.compareTo(o.getFirst());
         if (c1 == 0) {
             return second.compareTo(o.getSecond());
         } else {
             return c1;
+        }
+    }
+
+    public static <F extends Comparable<F>, S extends Comparable<S>> //
+    boolean equals(Pair<F, S> lhs, Pair<F, S> rhs) {
+        boolean isReferenceEquals = lhs == rhs;
+        if (isReferenceEquals) {
+            return true;
+        } else {
+            return lhs.getFirst().equals(rhs.getFirst())
+                    && lhs.getSecond().equals(rhs.getSecond());
         }
     }
 }

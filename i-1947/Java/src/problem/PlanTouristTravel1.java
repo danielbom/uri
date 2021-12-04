@@ -17,7 +17,7 @@ public class PlanTouristTravel1 implements PlanTouristTravel {
         minDistances = theMinDistances;
     }
 
-    public void addTravel(int origin, int destiny) {
+    public void addTravel(Integer origin, Integer destiny) {
         if (!tourists.containsKey(origin)) {
             tourists.put(origin, new ArrayList<Integer>());
         }
@@ -46,7 +46,7 @@ public class PlanTouristTravel1 implements PlanTouristTravel {
 
     private void attendTravel() {
         List<Integer> travels = tourists.get(currentPosition);
-        int destiny = travels.remove(0);
+        Integer destiny = travels.remove(0);
 
         if (travels.isEmpty()) {
             tourists.remove(currentPosition);

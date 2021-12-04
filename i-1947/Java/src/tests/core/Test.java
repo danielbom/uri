@@ -2,7 +2,9 @@ package tests.core;
 
 class EqualsExpectation extends RuntimeException {
     EqualsExpectation(Object expected, Object result) {
-        super("'" + expected + "' isn't equals to '" + result + "'");
+        super("The result is not equals to expected value.\n" +
+                "Expected: '" + expected + "\n" +
+                "Result:   '" + result + "'");
     }
 }
 

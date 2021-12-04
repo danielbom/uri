@@ -2,7 +2,6 @@ package graph.structures;
 
 import java.util.function.BiConsumer;
 
-import graph.Graph;
 import graph.Pair;
 import graph.Utils;
 
@@ -29,11 +28,11 @@ public class BidirectionalGraphSparse2 implements Graph {
 
     private List<List<Vertex>> graph;
 
-    public BidirectionalGraphSparse2(Integer size) {
-        createGraph(size);
+    public BidirectionalGraphSparse2(int capacity) {
+        createGraph(capacity);
     }
 
-    private void createGraph(Integer size) {
+    private void createGraph(int size) {
         graph = new ArrayList<List<Vertex>>(size);
         for (int i = 0; i < size; i++) {
             graph.add(new ArrayList<>());
@@ -41,15 +40,15 @@ public class BidirectionalGraphSparse2 implements Graph {
     }
 
     @Override
-    public void addVertex(int source, int destiny, int distance) {
+    public void addVertex(Integer source, Integer destiny, Integer distance) {
         graph.get(source).add(new Vertex(destiny, distance));
         graph.get(destiny).add(new Vertex(source, distance));
     }
 
     @Override
-    public int getVertexValue(int source, int destiny) {
+    public Integer getVertexValue(Integer source, Integer destiny) {
         for (Vertex vertex : graph.get(source)) {
-            if (vertex.getNode() == destiny) {
+            if (vertex.getNode().equals(destiny)) {
                 return vertex.getDistance();
             }
         }
@@ -57,7 +56,7 @@ public class BidirectionalGraphSparse2 implements Graph {
     }
 
     @Override
-    public void visitAdjacentNodesOf(int node, BiConsumer<Integer, Integer> consumer) {
+    public void visitAdjacentNodesOf(Integer node, BiConsumer<Integer, Integer> consumer) {
         for (Vertex vertex : graph.get(node)) {
             consumer.accept(vertex.getNode(), vertex.getDistance());
         }

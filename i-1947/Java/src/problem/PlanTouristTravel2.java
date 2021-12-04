@@ -28,27 +28,27 @@ public class PlanTouristTravel2 implements PlanTouristTravel {
     private int possibilities;
     private int totalDistance;
 
-    private int[][] costs;
-    private int[][] bestCosts;
+    private int[][] costs = new int[MAX_COSTS][MAX_COSTS];
+    private int[][] bestCosts = new int[MAX_COSTS][MAX_BEST_COSTS];
 
-    public PlanTouristTravel2(int touristsCount, MinDistances theMinDistances) {
+    public PlanTouristTravel2(Integer touristsCount, MinDistances theMinDistances) {
         touristsCountIncremented = touristsCount + 1;
         possibilities = 1 << touristsCountIncremented;
 
         minDistances = theMinDistances;
         totalDistance = 0;
-        costs = new int[MAX_COSTS][MAX_COSTS];
-        bestCosts = new int[MAX_COSTS][MAX_BEST_COSTS];
         travels = new ArrayList<Travel>(touristsCountIncremented);
         travels.add(new Travel(0, 0));
     }
 
-    public void addTravel(int source, int destiny) {
+    @Override
+    public void addTravel(Integer source, Integer destiny) {
         travels.add(new Travel(source, destiny));
-        int distance = minDistances.getMinDistance(source, destiny);
+        Integer distance = minDistances.getMinDistance(source, destiny);
         updateDistance(distance);
     }
 
+    @Override
     public void computeMinDistance() {
         int initialPosition = 0;
         int initialBitmask = 1;
@@ -59,6 +59,7 @@ public class PlanTouristTravel2 implements PlanTouristTravel {
         updateDistance(recursiveSolveBestCost(initialPosition, initialBitmask));
     }
 
+    @Override
     public int getTotalDistance() {
         return totalDistance;
     }

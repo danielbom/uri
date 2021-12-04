@@ -1,4 +1,4 @@
-package tests.basics.problem;
+package tests.problem;
 
 import java.util.*;
 import java.io.*;
@@ -29,9 +29,9 @@ public class PlanTouristTravelFileTest extends PlanTouristTravelTestTemplate {
 
     private Input input;
 
-    private int streetLimit;
-    private int streetsCount;
-    private int touristsCount;
+    private Integer streetLimit;
+    private Integer streetsCount;
+    private Integer touristsCount;
 
     public PlanTouristTravelFileTest( //
             Input theInput, //
@@ -66,9 +66,9 @@ public class PlanTouristTravelFileTest extends PlanTouristTravelTestTemplate {
         for (int i = 0; i < streetsCount; i++) {
             List<Integer> streetLine = readInts();
 
-            int origin = streetLine.get(0) - 1;
-            int destiny = streetLine.get(1) - 1;
-            int distance = streetLine.get(2);
+            Integer origin = streetLine.get(0) - 1;
+            Integer destiny = streetLine.get(1) - 1;
+            Integer distance = streetLine.get(2);
 
             addVertex(origin, destiny, distance);
         }
@@ -78,8 +78,8 @@ public class PlanTouristTravelFileTest extends PlanTouristTravelTestTemplate {
     protected void addTouristsTravel() {
         for (int i = 0; i < touristsCount; i++) {
             List<Integer> touristLine = readInts();
-            int origin = touristLine.get(0) - 1;
-            int destiny = touristLine.get(1) - 1;
+            Integer origin = touristLine.get(0) - 1;
+            Integer destiny = touristLine.get(1) - 1;
             addTravel(origin, destiny);
         }
     }

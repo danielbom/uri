@@ -1,7 +1,7 @@
-package tests.basics.min_distances;
+package tests.min_distances;
 
-import graph.*;
 import graph.algorithms.*;
+import graph.structures.Graph;
 import tests.core.*;
 
 public abstract class MinDistancesTestTemplate {

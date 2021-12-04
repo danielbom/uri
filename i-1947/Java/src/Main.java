@@ -1,15 +1,14 @@
 import java.util.*;
 
-import graph.*;
 import graph.algorithms.*;
 import graph.structures.*;
 import problem.*;
 
 public class Main {
     private static Scanner scan = new Scanner(System.in);
-    private static int streetLimit;
-    private static int streetsCount;
-    private static int touristsCount;
+    private static Integer streetLimit;
+    private static Integer streetsCount;
+    private static Integer touristsCount;
     private static Graph streetGraph;
     private static MinDistances minDistances;
     private static PlanTouristTravel planTouristTravel;
@@ -36,9 +35,9 @@ public class Main {
         for (int i = 0; i < streetsCount; i++) {
             List<Integer> streetLine = readInts();
 
-            int origin = streetLine.get(0) - 1;
-            int destiny = streetLine.get(1) - 1;
-            int distance = streetLine.get(2);
+            Integer origin = streetLine.get(0) - 1;
+            Integer destiny = streetLine.get(1) - 1;
+            Integer distance = streetLine.get(2);
 
             streetGraph.addVertex(origin, destiny, distance);
         }
@@ -48,11 +47,11 @@ public class Main {
     }
 
     private static void saveTouristsTravel() {
-        planTouristTravel = new PlanTouristTravel2(touristsCount, minDistances);
+        planTouristTravel = new PlanTouristTravel4(touristsCount, minDistances);
         for (int i = 0; i < touristsCount; i++) {
             List<Integer> touristLine = readInts();
-            int origin = touristLine.get(0) - 1;
-            int destiny = touristLine.get(1) - 1;
+            Integer origin = touristLine.get(0) - 1;
+            Integer destiny = touristLine.get(1) - 1;
             planTouristTravel.addTravel(origin, destiny);
         }
     }

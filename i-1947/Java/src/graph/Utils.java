@@ -3,9 +3,9 @@ package graph;
 import java.util.*;
 
 public class Utils {
-    public static final int DISTANCE_SENTINEL = -1;
+    public static final Integer DISTANCE_SENTINEL = -1;
 
-    public static List<List<Integer>> makeMatrix(Integer n) {
+    public static List<List<Integer>> makeMatrix(int n) {
         List<List<Integer>> matrix = new ArrayList<List<Integer>>(n);
         for (int i = 0; i < n; i++) {
             List<Integer> row = new ArrayList<Integer>(n);
