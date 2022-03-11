@@ -127,8 +127,7 @@
 * 1177: Array Fill II
 * 1178: Array Fill III
 * 1179: Array Fill IV
-  ...
-* 1180: Highest and Position
+* 1180: Lowest Number and Position
   ...
 * 1195: BST I
   ...
