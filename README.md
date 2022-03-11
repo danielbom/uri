@@ -110,6 +110,7 @@
 * 1154: Average of ages
 * 1155: S Sequence
 * 1156: S Sequence II
+* 1157: Divisors I
   ...
 * 1164: Perfect number
 * 1165: Prime Number 
