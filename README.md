@@ -121,7 +121,7 @@
   ...
 * 1172: Array Replacement I
 * 1173: Array fill I
-* 1174: Even or Odd
+* 1174: Array Selection I
 * 1175: Reverse 20 values
 * 1176: Fibonacci Array
 * 1177: Array Fill II
