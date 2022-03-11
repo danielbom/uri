@@ -111,6 +111,7 @@
 * 1155: S Sequence
 * 1156: S Sequence II
 * 1157: Divisors I
+* 1158: Sum of Consecutive Odd Numbers III
   ...
 * 1164: Perfect number
 * 1165: Prime Number 
