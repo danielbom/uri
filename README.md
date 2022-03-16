@@ -128,7 +128,7 @@
 * 1178: Array Fill III
 * 1179: Array Fill IV
 * 1180: Lowest Number and Position
-  ...
+* 1181: Line in Array
 * 1182: Column in Array
 * 1183: Above the Main Diagonal
 * 1184: Below the Main Diagonal
