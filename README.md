@@ -134,6 +134,7 @@
 * 1184: Below the Main Diagonal
 * 1185: Above the Secundary Diagonal
   ...
+* 1187: Bellow the Secundary Diagonal
 * 1187: Top Area
 * 1188: Inferior Area
 * 1189: Left Area
