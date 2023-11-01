@@ -1,3 +1,4 @@
+-- https://www.beecrowd.com.br/judge/en/problems/view/1960
 
 romanSequence = 
   [(1000, "M")
@@ -16,10 +17,10 @@ romanSequence =
   ]
 
 romanToArabic :: Int -> String
-romanToArabic x = snd $ foldl go (x, "") romanSequence
-  where go acc@(x', result) (y, roman) =
+romanToArabic x = snd $ foldl reducer (x, "") romanSequence
+  where reducer acc@(x', result) (y, roman) =
           if x' >= y
-          then (x' - y', result ++ replicate k roman)
+          then (x' - y', result ++ (concat $ replicate k roman))
           else acc
           where k = x' `div` y
                 y' = y * k
