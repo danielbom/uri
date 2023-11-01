@@ -204,6 +204,7 @@
 * 1958: Scientific Notation
 * 1959: Regular Simple Polygons
 * [1960]: Roman Numerals for Page Numbers
+* 1961: Jumping Frog
   ...
 * 2006: Identifying Tea
   ...
