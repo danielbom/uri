@@ -205,6 +205,7 @@
 * 1959: Regular Simple Polygons
 * [1960]: Roman Numerals for Page Numbers
 * 1961: Jumping Frog
+* 1962: A Long, Long Time Ago
   ...
 * 2006: Identifying Tea
   ...
