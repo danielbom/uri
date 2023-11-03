@@ -1,0 +1,1 @@
+print(''.join(reversed(str(int(input())))))
