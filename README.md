@@ -232,6 +232,8 @@
 * 2146 - Password
 * 2147 - Galopeira
   ...
+* 2152 - Pepe, I Already Took the Candle!
+  ...
 * 2159 - Approximate Number of Primes
 * 2160 - Name at Form
 * [2161] - Square Root of 10
