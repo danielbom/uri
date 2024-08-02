@@ -1,0 +1,1 @@
+This simple text line is good... and should be recognized as a TWEET, after all it has the exact maximum length allowed in Tweet messages!!!
