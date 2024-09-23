@@ -1,0 +1,7 @@
+3
+8 4=5
+2 5=5
+1 3=4
+Samuel 2 I
+Abner 3 I
+Aline 1 I
