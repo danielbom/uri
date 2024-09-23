@@ -50,5 +50,8 @@
     "typeinfo": "cpp",
     "map": "cpp"
   },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "go.enableCodeLens": {
+    "runtest": false
+  }
 }
