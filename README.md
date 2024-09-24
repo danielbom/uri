@@ -297,6 +297,7 @@
   ...
 * [2542] - Iu-Di-Oh!
 * 2543 - UFPR Gaming
+* 2544 - Kage Bunshin no Jutsu
   ...
 * 2602 - Basic Select
 * 2603 - Customer Address

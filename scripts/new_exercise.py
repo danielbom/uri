@@ -14,15 +14,15 @@ LANGUAGES = {
 
 def make_dir(path: Path, parents: bool = False, exist_ok: bool = False):
     path.mkdir(parents=parents, exist_ok=exist_ok)
-    print(f"INFO: Directory created {path}")
+    print(f"INFO: Directory created {str(path).replace('\\', '/')}")
 
 
 def make_file(path: Path, content: str = ""):
     if path.exists():
-        print(f"INFO: File already exists {path}")
+        print(f"INFO: File already exists {str(path).replace('\\', '/')}")
     else:
         path.write_text(content)
-        print(f"INFO: File created {path}")
+        print(f"INFO: File created {str(path).replace('\\', '/')}")
 
 
 def main():
