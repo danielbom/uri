@@ -299,6 +299,8 @@
 * 2543 - UFPR Gaming
 * 2544 - Kage Bunshin no Jutsu
   ...
+* 2547 - Roller Coaster
+  ...
 * 2602 - Basic Select
 * 2603 - Customer Address
 * 2604 - Under 10 or Greater Than 100
