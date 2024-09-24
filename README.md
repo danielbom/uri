@@ -296,6 +296,7 @@
 * 2540 - Leader's Impeachment
   ...
 * [2542] - Iu-Di-Oh!
+* 2543 - UFPR Gaming
   ...
 * 2602 - Basic Select
 * 2603 - Customer Address
