@@ -365,6 +365,7 @@
 * 2754 - Output 8
 * 2755 - Output 9
 * 2756 - Output 10
+* 2757 - Input and Output of Integers
   ...
 * 2764 - Date Input and Output
   ...
