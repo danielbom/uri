@@ -368,6 +368,7 @@
 * 2757 - Input and Output of Integers
 * 2758 - Floating Number Input and Output
 * 2759 - Input and Output Character
+* 2760 - String Input and Output
   ...
 * 2764 - Date Input and Output
   ...
