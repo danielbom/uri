@@ -374,6 +374,7 @@
 * 2763 - CPF Input and Output
 * 2764 - Date Input and Output
 * 2765 - Coming Input and Output
+* 2766 - Input and Output Reading and Skipping Names
   ...
 * 2807 - Reversed fibonacci (Iccanobif)
   ...
