@@ -370,6 +370,7 @@
 * 2759 - Input and Output Character
 * 2760 - String Input and Output
 * 2761 - Input and Output of Various Types
+* 2762 - Input and Output 6
   ...
 * 2764 - Date Input and Output
   ...
