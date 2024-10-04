@@ -388,6 +388,7 @@
 * 2782 - Stepladder
 * [2783] - Cup Stickers
   ...
+* [2785] - Pyramid
 * 2786 - School Floor
 * 2787 - Chess
   ...
