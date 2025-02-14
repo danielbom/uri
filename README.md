@@ -439,3 +439,8 @@
 * 3303 - Big/Small word
   ...
 * 3342 - Keanu
+
+# References
+
+* [Beecrowd Platform](https://judge.beecrowd.com/en)
+* [CP Algorithms](https://cp-algorithms.com/index.html)
