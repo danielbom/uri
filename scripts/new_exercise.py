@@ -25,13 +25,23 @@ def make_file(path: Path, content: str = ""):
         print(f"INFO: File created {str(path).replace('\\', '/')}")
 
 
+def valid_samples(text):
+    try:
+        value = int(text)
+        if value < 0 or value > 10:
+            raise ValueError("expects samples to be an integer between 1 and 10")
+        return value
+    except:
+        raise ValueError("expects samples to be an integer value")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Create a new exercise")
     parser.add_argument("number", type=int, help="The number of the exercise")
     parser.add_argument("language", nargs="+",
                         help="The language of the exercise",
                         choices=LANGUAGES.keys())
-    parser.add_argument("--samples", type=int, default=1,
+    parser.add_argument("--samples", type=valid_samples, default=1,
                         help="The number of sample inputs and outputs")
 
     args = parser.parse_args()
