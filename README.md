@@ -449,4 +449,5 @@
 * [Beecrowd Platform](https://judge.beecrowd.com/en)
 * [CP Algorithms](https://cp-algorithms.com/index.html)
 * [Github xTecna](https://github.com/xTecna/solucoes-da-beecrowd/)
+* [Github Potigol](https://github.com/potigol/beecrowd/)
 * [Youtube Channel - Augusto Galego](https://www.youtube.com/@GutoGalego/videos)
