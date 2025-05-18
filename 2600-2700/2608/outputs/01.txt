@@ -1,0 +1,2 @@
+"MAX(p.price)","MIN(p.price)"
+"800","25.5"

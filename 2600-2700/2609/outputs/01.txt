@@ -1,0 +1,5 @@
+"name","sum"
+"luxury","350"
+"modern","13000"
+"vintage","1000"
+"wood","850"

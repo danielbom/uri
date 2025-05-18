@@ -1,0 +1,4 @@
+"id","name"
+"2","Dining table"
+"3","Towel holder"
+"5","Chair"
