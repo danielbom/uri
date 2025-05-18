@@ -1,15 +1,26 @@
-import sqlite3
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "psycopg2",
+# ]
+# ///
+import psycopg2
 from pathlib import Path
 import difflib
 
 
-def get_connection(db_path: Path):
-    return sqlite3.connect(str(db_path))
+def get_connection():
+    # Start docker with:
+    # docker run --name uri_postgres -e POSTGRES_DB=uri_db -e POSTGRES_USER=uri -e POSTGRES_PASSWORD=uri_exercises -p 5432:5432 -d postgres:9
+    return psycopg2.connect(f"dbname=uri_db user=uri password=uri_exercises host=localhost")
 
 
 def execute_file(conn, file_path: Path):
     sql_script = file_path.read_text(encoding="utf-8")
-    conn.executescript(sql_script)
+    cursor = conn.cursor()
+    cursor.execute(sql_script)
+    conn.commit()
+    cursor.close()
 
 
 def execute_select(conn, query_path: Path, write: callable):
@@ -23,7 +34,7 @@ def execute_select(conn, query_path: Path, write: callable):
         for row in rows:
             write(','.join(f'"{item}"' for item in row))
             write('\n')
-    except sqlite3.Error as e:
+    except psycopg2.Error as e:
         write(f"SQLite error: {e}")
 
 
@@ -56,9 +67,16 @@ def compare_text(result: str, expected: str):
 
 
 def main():
-    db_path = Path(__file__).parent / "db.sqlite"
-    db_path.unlink(missing_ok=True)
-    conn = get_connection(db_path)
+    conn = get_connection()
+
+    # Recreate schema uri_db (drop, craete, use)
+    cursor = conn.cursor()
+    cursor.execute("DROP SCHEMA IF EXISTS uri_db CASCADE;")
+    cursor.execute("CREATE SCHEMA uri_db;")
+    cursor.execute("SET search_path TO uri_db;")
+    conn.commit()
+    cursor.close()
+
     execute_file(conn, Path("./tables.sql"))
     for in_path in Path("../inputs/").glob("*.sql"):
         name = in_path.with_suffix('.txt').name

@@ -4,5 +4,5 @@ CREATE TABLE customers (
   street VARCHAR(255),
   city VARCHAR(255),
   state CHAR(2),
-  credit_limit NUMBER
+  credit_limit DECIMAL(19, 2)
 );
