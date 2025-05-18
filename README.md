@@ -319,6 +319,7 @@
 * 2607 - Providers's City in Alphabetical Order
 * 2608 - Higher and Lower Price
 * 2609 - Products by Categories
+* 2610 - Average Value of Products
   ...
 * 2621 - Amounts Between 10 and 20
   ...
