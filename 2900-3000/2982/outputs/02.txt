@@ -1,0 +1,1 @@
+A greve vai parar.
