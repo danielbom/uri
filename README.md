@@ -374,6 +374,7 @@
 * 2737 - Lawyers
 * 2738 - Contest
 * 2739 - Payday
+* 2740 - League
   ...
 * 2747 - Output 1
 * 2748 - Output 2
