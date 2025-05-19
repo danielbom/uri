@@ -328,6 +328,7 @@
 * 2616 - No Rental
 * 2617 - Provider Ajax SA
 * 2618 - Imported Products
+* 2619 - Super Luxury
   ...
 * 2621 - Amounts Between 10 and 20
   ...
