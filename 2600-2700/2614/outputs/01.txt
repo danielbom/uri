@@ -1,0 +1,2 @@
+"name","rentals_date"
+"Rebeca Barbosa Santos","2016-09-10"
