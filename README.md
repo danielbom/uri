@@ -330,8 +330,8 @@
 * 2618 - Imported Products
 * 2619 - Super Luxury
 * 2620 - Orders in First Half
-  ...
 * 2621 - Amounts Between 10 and 20
+* 2622 - Legal Person
   ...
 * [2626] - JB6 Team
   ...
