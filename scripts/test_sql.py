@@ -26,6 +26,8 @@ def execute_file(conn, file_path: Path):
 def execute_select(conn, query_path: Path, write: callable):
     try:
         query = query_path.read_text(encoding="utf-8")
+        print(query_path.absolute())
+        print(query)
         cursor = conn.cursor()
         cursor.execute(query)
         rows = cursor.fetchall()

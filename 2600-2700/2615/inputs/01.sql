@@ -5,4 +5,4 @@ VALUES
 (3, 'Rebeca Barbosa Santos', 'Rua Observatório Meteorológico', 'Salvador'),
 (4, 'Sarah Carvalho Correia', 'Rua Antônio Carlos da Silva', 'Uberlândia'),
 (5, 'João Almeida Lima', 'Rua Rio Taiuva', 'Ponta Grossa'),
-(6, 'Diogo Melo Dias', 'Rua Duzentos e Cinqüenta', 'Várzea Grande');;
+(6, 'Diogo Melo Dias', 'Rua Duzentos e Cinqüenta', 'Várzea Grande');

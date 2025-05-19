@@ -1,6 +1,6 @@
 "city"
-"Uberlândia"
 "Canoas"
 "Ponta Grossa"
-"Várzea Grande"
 "Salvador"
+"Uberlândia"
+"Várzea Grande"
