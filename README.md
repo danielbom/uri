@@ -333,6 +333,7 @@
 * 2621 - Amounts Between 10 and 20
 * 2622 - Legal Person
 * 2623 - Categories with Various Products
+* 2624 - Number of Cities per Customers
   ...
 * [2626] - JB6 Team
   ...
