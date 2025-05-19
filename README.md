@@ -372,6 +372,7 @@
 * 2727 - Secret Code
   ...
 * 2737 - Lawyers
+* 2738 - Contest
   ...
 * 2747 - Output 1
 * 2748 - Output 2
