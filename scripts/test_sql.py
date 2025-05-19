@@ -40,10 +40,6 @@ def execute_select(conn, query_path: Path, write: callable):
         write(f"SQLite error: {e}")
 
 
-def print_write(text: str):
-    print(text, end="")
-
-
 class StrBuilder:
     def __init__(self):
         self.parts = []
@@ -55,12 +51,28 @@ class StrBuilder:
         return ''.join(self.parts)
 
 
-def compare_text(result: str, expected: str):
+class FileBuilder:
+    def __init__(self, path: Path):
+        self.path = path
+        self.file = path.open('w', encoding='utf-8')
+
+    def write(self, text: str):
+        self.file.write(text)
+
+    def string(self) -> str:
+        if not self.file.closed:
+            self.file.close()
+        return self.path.read_text()
+
+
+def compare_text(result_b: FileBuilder, expected_path: Path):
+    result = result_b.string()
+    expected = expected_path.read_text(encoding="utf-8")
     diff = list(difflib.unified_diff(
         expected.splitlines(keepends=True),
         result.splitlines(keepends=True),
-        fromfile='expected',
-        tofile='result'
+        fromfile=str(expected_path.absolute().resolve()),
+        tofile=str(result_b.path.absolute().resolve()),
     ))
     if diff:
         print(''.join(diff))
@@ -84,10 +96,9 @@ def main():
         name = in_path.with_suffix('.txt').name
         out_path = in_path.parent.parent / "outputs" / name
         execute_file(conn, in_path)
-        sb = StrBuilder()
-        execute_select(conn, Path("./query.sql"), sb.write)
-        expected = out_path.read_text(encoding="utf-8")
-        if not compare_text(sb.string(), expected):
+        fb = FileBuilder(Path(__file__).parent / "sql_result.txt")
+        execute_select(conn, Path("./query.sql"), fb.write)
+        if not compare_text(fb, out_path):
             break
         print(f"✅ Test {in_path.stem}")
 
