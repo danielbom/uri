@@ -1,0 +1,5 @@
+"name","matches","victories","defeats","draws","score"
+"CEARA","3","2","0","1","7"
+"FORTALEZA","3","2","0","1","7"
+"FLORESTA","3","1","2","0","3"
+"GUARANY DE SOBRAL","3","0","3","0","0"
