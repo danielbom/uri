@@ -1,0 +1,4 @@
+CREATE TABLE people (
+  id NUMERIC PRIMARY KEY,
+  name VARCHAR(255)
+);

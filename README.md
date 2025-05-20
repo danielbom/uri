@@ -377,6 +377,7 @@
 * 2740 - League
 * 2741 - Students Grades
 * 2742 - Richard's Multiverse
+* 2743 - Number of Characters
   ...
 * 2747 - Output 1
 * 2748 - Output 2

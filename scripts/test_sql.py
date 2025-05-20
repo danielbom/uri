@@ -24,20 +24,17 @@ def execute_file(conn, file_path: Path):
 
 
 def execute_select(conn, query_path: Path, write: callable):
-    try:
-        query = query_path.read_text(encoding="utf-8")
-        print(query_path.absolute())
-        print(query)
-        cursor = conn.cursor()
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        write(','.join(f'"{desc[0]}"' for desc in cursor.description))
+    query = query_path.read_text(encoding="utf-8")
+    print(query_path.absolute())
+    print(query)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    write(','.join(f'"{desc[0]}"' for desc in cursor.description))
+    write('\n')
+    for row in rows:
+        write(','.join(f'"{item}"' for item in row))
         write('\n')
-        for row in rows:
-            write(','.join(f'"{item}"' for item in row))
-            write('\n')
-    except psycopg2.Error as e:
-        write(f"SQLite error: {e}")
 
 
 class StrBuilder:
