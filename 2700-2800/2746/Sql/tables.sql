@@ -1,0 +1,4 @@
+CREATE TABLE virus (
+  id NUMERIC PRIMARY KEY,
+  name VARCHAR(32)
+);
