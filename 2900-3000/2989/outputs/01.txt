@@ -1,0 +1,8 @@
+"departamento","divisao","media","maior"
+"TI","Analise de Sistemas","7733.33","10350.00"
+"TI","Programacao","6900.00","7200.00"
+"Engenharia","Concreto","6316.67","10650.00"
+"Contabilidade","Passivo","5900.00","8700.00"
+"Engenharia","Calculo Estrutural","5600.00","6700.00"
+"TI","Desenvoilvimento de Projetos","4700.00","7700.00"
+"Contabilidade","Ativo","4366.67","6000.00"
