@@ -1,0 +1,4 @@
+"Nome Departamento","Numero de Empregados","Media Salarial","Maior Salario","Menor Salario"
+"TI","9","6200.00","10350.00","0"
+"Engenharia","5","6030.00","10650.00","1900.00"
+"Contabilidade","6","5133.33","8700.00","3000.00"
