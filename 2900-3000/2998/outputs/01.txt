@@ -1,0 +1,3 @@
+"name","investment","month_of_payback","return"
+"Lucas","1000","3","300"
+"Oliveira","2000","2","0"
