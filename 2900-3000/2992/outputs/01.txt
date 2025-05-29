@@ -1,0 +1,4 @@
+"departamento","divisao","media"
+"TI","Analise de Sistemas","7733.33"
+"Engenharia","Concreto","6316.67"
+"Contabilidade","Passivo","5900.00"

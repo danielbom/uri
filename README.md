@@ -471,7 +471,7 @@
 * [2989] - Departments and Divisions
 * 2990 - Employees CPF
 * [2991] - Department Statistics
-  ...
+* [2992] - Highest Avarage Salary Divisions
 * 2993 - Most Frequent
 * [2994] - How much earn a Doctor?
 * 2995 - The Sensor Message
