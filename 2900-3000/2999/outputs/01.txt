@@ -1,0 +1,5 @@
+"nome","salario"
+"Jose Sampaio","8700.00"
+"Andre","10350.00"
+"Barbara","9200.00"
+"Jose da Silva","10650.00"
