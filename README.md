@@ -504,6 +504,8 @@
 * 3303 - Big/Small word
   ...
 * 3342 - Keanu
+  ...
+* 3480 - Adjacent Chairs
 
 # References
 
