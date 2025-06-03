@@ -59,7 +59,7 @@ class FileBuilder:
     def string(self) -> str:
         if not self.file.closed:
             self.file.close()
-        return self.path.read_text()
+        return self.path.read_text(encoding='utf-8')
 
 
 def compare_text(result_b: FileBuilder, expected_path: Path):

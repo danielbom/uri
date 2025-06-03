@@ -507,7 +507,8 @@
   ...
 * 3480 - Adjacent Chairs
 * [3481] - Classifying a Tree
-* 3482 - Followers
+* [3482] - Followers
+* [3483] - Second Largest and Smallest
 
 # References
 
